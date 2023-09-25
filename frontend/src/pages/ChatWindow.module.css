@@ -1,0 +1,76 @@
+.rightContainer {
+  width: 70%;
+  height: 100%;
+}
+
+.defaultContent {
+  background-color: rgb(34, 46, 53);
+  height: 100%;
+  width: 100%;
+  color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.singleChat {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.GroupHeader {
+  /* height: 3.5rem; */
+  background-color: rgb(34, 46, 53);
+  display: flex;
+  align-items: center;
+  padding: 0px 18px 0px 10px;
+  height: 8%;
+}
+
+.GroupName {
+  display: flex;
+  flex: 1;
+  padding: 15px;
+}
+
+.chatWindow {
+  /* display: flex;
+  flex: 1; */
+  height: 84%;
+}
+
+.footerInput {
+  background-color: rgb(32, 44, 51);
+  border-radius: 5px;
+  margin: 0 0 0 5px;
+  height: 6%;
+}
+
+.footerInput input {
+  background-color: rgb(32, 44, 51);
+  border-color: rgb(32, 44, 51);
+  color: rgb(209, 215, 219);
+}
+
+.footerInput button {
+  border-color: rgb(64, 64, 64);
+}
+
+.footerInput input:focus {
+  background-color: rgb(32, 44, 51);
+  border-color: rgb(32, 44, 51);
+  color: rgb(209, 215, 219);
+}
+
+.footerInput input::placeholder {
+  color: grey;
+  opacity: 1;
+}
+
+.spinner {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}

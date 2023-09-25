@@ -1,0 +1,27 @@
+.mainContainer {
+  height: 100%;
+  width: 100%;
+}
+
+.noMessages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  color: grey;
+}
+
+.singleMessage {
+  background-color: rgb(34, 44, 51);
+  margin: 3px;
+  padding: 3px;
+  width: fit-content;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.sender {
+  color: rgb(83, 189, 235);
+}

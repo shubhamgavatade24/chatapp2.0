@@ -1,0 +1,23 @@
+.CreateGroupModal {
+  background-color: rgb(32, 34, 51);
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.newHeader {
+  color: lightgrey;
+}
+
+.userBadges {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+}
+
+.createGroupButton {
+  padding-top: 10px;
+}

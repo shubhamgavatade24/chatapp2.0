@@ -1,0 +1,60 @@
+.App {
+  /* background-color: rgb(239, 251, 255); */
+  height: 100vh;
+  width: 100%vw;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(231, 231, 231, 0.281);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+#Options-dropdown {
+  background-color: rgb(17, 23, 33);
+  border-color: rgb(17, 23, 33);
+  color: lightgray;
+}
+
+#Options-dropdown:hover {
+  cursor: pointer;
+  background-color: rgb(65, 66, 69);
+}
+
+.App {
+  background-color: rgb(17, 23, 33);
+}
+
+#loginButton {
+  background-color: rgb(6, 207, 156);
+  border-color: rgb(6, 207, 156);
+}
+
+#Home-page-tab-Login {
+  color: grey;
+}
+
+.active #Home-page-tab-Login {
+  color: black;
+}
+
+#Home-page-tab-Signup {
+  color: grey;
+}
+
+#Home-page-tab-Login.active {
+  background-color: rgb(6, 207, 156);
+  color: white;
+}
+
+#Home-page-tab-Signup.active {
+  background-color: rgb(6, 207, 156);
+  color: white;
+}

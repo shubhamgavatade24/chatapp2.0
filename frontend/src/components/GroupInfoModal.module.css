@@ -1,0 +1,72 @@
+.GroupInfoModal {
+  background-color: rgb(32, 34, 51);
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.GroupNameContent {
+  color: grey;
+}
+
+.groupNameShow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(32, 34, 30);
+  padding: 2px 10px;
+}
+
+.groupNameShowIcon {
+  cursor: pointer;
+}
+
+.addRemoveUsers {
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.addUsersContainer {
+  width: 45%;
+}
+
+.removeUsersContainer {
+  width: 45%;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+.existingUsersList {
+  height: 40vh;
+  overflow-y: scroll;
+}
+
+.ProfileInfoModal {
+  background-color: rgb(32, 34, 51);
+  padding: 2rem;
+  border-radius: 7px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileItem {
+  padding-top: 20px;
+  height: 70px;
+}
+
+.profilekey {
+  color: grey;
+  font-size: 30px;
+}
+
+.profileVal {
+  color: lightgray;
+  font-size: 35px;
+}

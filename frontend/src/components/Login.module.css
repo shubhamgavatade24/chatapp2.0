@@ -1,0 +1,23 @@
+.toaster {
+  margin: 2rem;
+}
+
+.LoginPage label {
+  color: lightgray;
+}
+
+.LoginSignButton {
+  background-color: rgb(6, 207, 156);
+  border-color: rgb(6, 207, 156);
+}
+
+.LoginPage input {
+  background-color: rgb(32, 44, 51);
+  border-color: rgb(32, 44, 51);
+  color: rgb(209, 215, 219);
+}
+.LoginPage input:focus {
+  background-color: rgb(32, 44, 51);
+  border-color: rgb(32, 44, 51);
+  color: rgb(209, 215, 219);
+}

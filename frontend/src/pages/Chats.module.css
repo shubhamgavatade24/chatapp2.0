@@ -1,0 +1,15 @@
+.backround {
+  background-color: rgb(17, 23, 33) !important;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  /* overflow-y: scroll; */
+}
+
+.maincontainer {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  padding: 3vh;
+  display: flex;
+}

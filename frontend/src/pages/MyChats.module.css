@@ -1,0 +1,118 @@
+.leftcontainer {
+  width: 30%;
+  min-width: 300px;
+  height: 100%;
+  border-right: 1px solid rgb(47, 59, 67);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.header {
+  height: 8%;
+  background-color: rgb(32, 44, 51);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem;
+}
+
+.icons {
+  margin: 15px;
+}
+
+.searchBar {
+  margin: 5px 5px 5px 0px;
+}
+
+.searchBar input {
+  background-color: rgb(32, 44, 51);
+  border-color: rgb(32, 44, 51);
+  color: rgb(209, 215, 219);
+}
+.searchBar button {
+  /* background-color: rgb(32, 44, 51); */
+  border-color: rgb(32, 44, 51);
+}
+
+.searchBar input:focus {
+  background-color: rgb(32, 44, 51);
+  border-color: rgb(32, 44, 51);
+  color: rgb(209, 215, 219);
+}
+
+.searchBar input::placeholder {
+  color: grey;
+  opacity: 1;
+}
+/* .searchBar {
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  justify-content: space-evenly;
+} */
+
+.searchInput {
+  width: 85%;
+  height: 2rem;
+  border-radius: 5px;
+  color: rgb(250, 250, 250);
+  background-color: rgb(32, 44, 51);
+}
+
+.searchHeader {
+  color: grey;
+}
+
+.ChatsContainer {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  color: gray;
+}
+
+.menu {
+  .btn {
+    color: white !important;
+  }
+}
+
+.scrollableChats {
+  overflow-y: scroll;
+  height: 100%;
+  padding-bottom: 100px;
+}
+
+.headerNotif {
+  display: flex;
+  align-items: center;
+}
+
+.headerNotif div {
+  z-index: 10;
+}
+
+.notificationIcon {
+  background: unset;
+  margin-right: 15px;
+  border-radius: 10px;
+}
+
+.profileIcon:hover {
+  cursor: pointer;
+}
+/* .btn-success {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: white;
+  --bs-btn-border-color: white;
+  --bs-btn-hover-color: white;
+  --bs-btn-hover-bg: white;
+  --bs-btn-hover-border-color: white;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: white;
+  --bs-btn-active-border-color: white;
+  --bs-btn-disabled-color: white;
+  --bs-btn-disabled-bg: white;
+  --bs-btn-disabled-border-color: white;
+} */
