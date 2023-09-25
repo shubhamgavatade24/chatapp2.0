@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.1",
+    "chat2.0": "file:..",
     "js-cookie": "^3.0.5",
     "rc-menu": "^9.12.0",
     "react": "^18.2.0",
