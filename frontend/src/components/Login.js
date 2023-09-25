@@ -10,8 +10,8 @@ import Cookies from "js-cookie";
 
 import { Navigate } from "react-router-dom";
 const Login = () => {
-  const [email, setEmail] = useState("chatuser1");
-  const [password, setPassword] = useState("qwer");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
 
   const [error, errorShow] = useState(false);
