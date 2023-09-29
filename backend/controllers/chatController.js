@@ -16,8 +16,6 @@ const initiateChat = async (req, res) => {
     ],
   }).populate("members", "-password");
 
-  console.log(isChat);
-
   if (isChat ? isChat.length : 0) {
     res.send(isChat[0]);
   } else {
@@ -33,7 +31,6 @@ const initiateChat = async (req, res) => {
         "members",
         "-password"
       );
-      console.log("heres the fullchat", FullChat);
       res.status(200).json(FullChat);
     } catch (error) {
       res.status(400);

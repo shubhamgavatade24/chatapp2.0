@@ -42,12 +42,6 @@ const getAllMessges = asyncHandler(async (req, res) => {
       })
       .populate("sender", "-password")
       .populate("chat");
-
-    // messages = await UserModel.populate(messages, {
-    //   path: "chat.members",
-    //   select: "name email",
-    // });
-    // console.log(messages);
     res.status(200).send(messages);
   } catch (e) {
     res.status(400).send(e.message);
