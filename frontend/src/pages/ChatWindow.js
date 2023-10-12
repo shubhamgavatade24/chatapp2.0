@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import classes from "./ChatWindow.module.css";
 import { CgProfile } from "react-icons/cg";
 import { FaPaperPlane } from "react-icons/fa";
+import { IoMdArrowBack } from "react-icons/io";
 import { BiGroup, BiDotsVerticalRounded } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import GroupInfoModal from "../components/GroupInfoModal";
@@ -9,14 +10,17 @@ import { Button, Form, InputGroup, Spinner } from "react-bootstrap";
 import axios from "axios";
 import ScrollableChat from "../components/ScrollableChat";
 import io from "socket.io-client";
-import { sendNotification } from "../store/actions/mainActions";
+import {
+  sendNotification,
+  setSelectedChat,
+} from "../store/actions/mainActions";
 import Cookies from "js-cookie";
 import { ErrorBoundary } from "react-error-boundary";
 
 const ENDPOINT = "http://localhost:5000"; // "https://talk-a-tive.herokuapp.com"; -> After deployment
 var socket, selectedChatCompare;
 
-const ChatWindow = () => {
+const ChatWindow = ({ fullwidth }) => {
   const selectedChat = useSelector((state) => state.selectedChat);
   // const _id = useSelector((state) => state._id);
   const _id = JSON.parse(Cookies.get("userInfo"))?._id;
@@ -145,6 +149,11 @@ const ChatWindow = () => {
     }
   };
 
+  const backButtonHandler = () => {
+    //make selected chat blank here
+    dispatch(setSelectedChat({}));
+  };
+
   const defaultContent = (
     <div className={classes.defaultContent}>
       <h3>Chat Smarter, Connect Better.</h3>
@@ -154,6 +163,9 @@ const ChatWindow = () => {
   const chatWindowContent = (
     <div className={classes.singleChat}>
       <div className={classes.GroupHeader}>
+        {fullwidth && (
+          <IoMdArrowBack color="white" size={30} onClick={backButtonHandler} />
+        )}
         {selectedChat.isGroupChat ? (
           <BiGroup color="white" size={42} />
         ) : (
@@ -199,7 +211,10 @@ const ChatWindow = () => {
 
   return (
     <ErrorBoundary fallback={<p>⚠️Something went wrong</p>}>
-      <div className={classes.rightContainer} style={{ color: "white" }}>
+      <div
+        className={classes.rightContainer}
+        style={{ color: "white", ...fullwidth }}
+      >
         {selectedChat._id ? chatWindowContent : defaultContent}
         <GroupInfoModal
           show={showGroupInfoModal}

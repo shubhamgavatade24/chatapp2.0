@@ -10,6 +10,6 @@
   box-sizing: border-box;
   height: 100%;
   width: 100%;
-  padding: 3vh;
+  /* padding: 3vh; */
   display: flex;
 }

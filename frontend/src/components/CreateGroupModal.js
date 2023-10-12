@@ -132,7 +132,11 @@ const CreateGroupModal = ({
         <div className={classes.userBadges}>
           {addedUsers?.map((item) => {
             return (
-              <UserBadge user={item} onClick={() => userRemoveHandler(item)} />
+              <UserBadge
+                key={item._id}
+                user={item}
+                onClick={() => userRemoveHandler(item)}
+              />
             );
           })}
         </div>

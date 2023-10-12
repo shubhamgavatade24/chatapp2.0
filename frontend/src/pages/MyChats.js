@@ -33,7 +33,7 @@ import NotificationBadge from "react-notification-badge";
 import { Effect } from "react-notification-badge";
 import ProfileInfoModal from "../components/ProfileInfoModal";
 import { ErrorBoundary } from "react-error-boundary";
-const MyChats = () => {
+const MyChats = ({ fullwidth }) => {
   // const token = useSelector((state) => state.token);
   const token = JSON.parse(Cookies.get("userInfo"))?.token;
   // const _id = useSelector((state) => state._id);
@@ -241,7 +241,6 @@ const MyChats = () => {
     const recentData = JSON.parse(window.localStorage.getItem("recent" + _id));
     if (recentData.length) {
       returnChatData = (
-        // <div className={classes.ChatsContainer}>heres your recent Searches</div>
         <ChatData
           dataGetter={dataForwarder}
           isSearchResultShow={isSearchResultShow}
@@ -309,7 +308,7 @@ const MyChats = () => {
 
   return (
     <ErrorBoundary fallback={<p>⚠️Something went wrong</p>}>
-      <div className={classes.leftcontainer}>
+      <div className={classes.leftcontainer} style={{ ...fullwidth }}>
         <div className={classes.header}>
           <div
             className={classes.profileIcon}

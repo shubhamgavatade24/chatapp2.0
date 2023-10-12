@@ -58,3 +58,7 @@
   background-color: rgb(6, 207, 156);
   color: white;
 }
+
+.ChatWindow_footerInput__vvShm .input-group {
+  height: 100%;
+}
