@@ -6,7 +6,7 @@ import InitialChatFrame from "./InitialChatFrame";
 // import { setSelectedChat } from "../store/actions/mainActions";
 
 const ChatData = ({ dataGetter, isSearchResultShow, chatLauncher }) => {
-  const selectedChat = useSelector((state) => state.selectedChat);
+  // const selectedChat = useSelector((state) => state.selectedChat);
 
   return (
     <>

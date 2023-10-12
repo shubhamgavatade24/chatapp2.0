@@ -55,6 +55,34 @@ const MyChats = () => {
 
   const myChats = useSelector((state) => state.myChats);
 
+  useEffect(() => {
+    var clearTime;
+    try {
+      if (!searchVal) {
+        setSearchLoading(false);
+        return;
+      }
+      setSearchLoading(true);
+      clearTime = setTimeout(async () => {
+        const url = `/api/user?search=${searchVal}`;
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const { data } = await axios.get(url, config);
+        setSearchData(data);
+        console.log("api called ", searchVal);
+        setSearchLoading(false);
+      }, 500);
+    } catch (e) {
+      console.log(e);
+      setSearchLoading(false);
+    }
+
+    return () => clearTimeout(clearTime);
+  }, [searchVal]);
+
   const fetchInitialChats = async () => {
     try {
       setSearchLoading(true);
@@ -78,6 +106,13 @@ const MyChats = () => {
     fetchInitialChats();
   }, [refreshChatList]);
 
+  const onSearchChangeHandler = (e) => {
+    setSearchVal(e.target.value);
+    if (e.target.value) {
+      setIsSearchResultShow(true);
+    }
+  };
+
   const onSearchHandler = async () => {
     if (!searchVal) {
       window.alert("please enter something");
@@ -86,6 +121,7 @@ const MyChats = () => {
     try {
       setIsSearchResultShow(true);
       setSearchLoading(true);
+
       const url = `/api/user?search=${searchVal}`;
       const config = {
         headers: {
@@ -94,6 +130,7 @@ const MyChats = () => {
       };
       const { data } = await axios.get(url, config);
       setSearchData(data);
+
       setSearchLoading(false);
       console.log(data);
     } catch (e) {
@@ -109,6 +146,9 @@ const MyChats = () => {
 
   const dataForwarder = () => {
     if (isSearchResultShow) {
+      if (!searchVal) {
+        return JSON.parse(window.localStorage.getItem("recent" + _id));
+      }
       return searchData;
     } else {
       return myChats;
@@ -119,6 +159,45 @@ const MyChats = () => {
     return item.members[0]._id === _id
       ? item.members[1]._id
       : item.members[0]._id;
+  };
+
+  const manageRecentSearches = (item) => {
+    if (
+      JSON.parse(window.localStorage.getItem("recent" + _id)).find(
+        (ele) => ele._id === item._id
+      )
+    ) {
+      const updatedArr = JSON.parse(
+        window.localStorage.getItem("recent" + _id)
+      ).filter((ele) => {
+        if (item._id !== ele._id) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      window.localStorage.setItem(
+        "recent" + _id,
+        JSON.stringify([item, ...updatedArr])
+      );
+    } else if (
+      JSON.parse(window.localStorage.getItem("recent" + _id)).length >= 5
+    ) {
+      let updatedArr = [
+        item,
+        ...JSON.parse(window.localStorage.getItem("recent" + _id)),
+      ];
+      updatedArr.pop();
+      window.localStorage.setItem("recent" + _id, JSON.stringify(updatedArr));
+    } else {
+      window.localStorage.setItem(
+        "recent" + _id,
+        JSON.stringify([
+          item,
+          ...JSON.parse(window.localStorage.getItem("recent" + _id)),
+        ])
+      );
+    }
   };
 
   const onChatLaunch = async (item) => {
@@ -138,9 +217,7 @@ const MyChats = () => {
           config
         );
         dispatch(actions.setSelectedChat(data));
-        // setRefreshAgain((state) => {
-        //   return !state;
-        // });
+        manageRecentSearches(item);
         let isChatPresent = myChats.find((item) => item._id === data._id);
         if (!isChatPresent) {
           dispatch(actions.addChatsToMyChats([data]));
@@ -150,9 +227,6 @@ const MyChats = () => {
       }
     } else {
       dispatch(actions.setSelectedChat(item));
-      // setRefreshAgain((state) => {
-      //   return !state;
-      // });
     }
   };
 
@@ -163,6 +237,22 @@ const MyChats = () => {
         <Spinner animation="border" variant="light" />
       </div>
     );
+  } else if (isSearchResultShow && !searchVal) {
+    const recentData = JSON.parse(window.localStorage.getItem("recent" + _id));
+    if (recentData.length) {
+      returnChatData = (
+        // <div className={classes.ChatsContainer}>heres your recent Searches</div>
+        <ChatData
+          dataGetter={dataForwarder}
+          isSearchResultShow={isSearchResultShow}
+          chatLauncher={onChatLaunch}
+        />
+      );
+    } else {
+      returnChatData = (
+        <div className={classes.ChatsContainer}>No recent Searches</div>
+      );
+    }
   } else if (isSearchResultShow && !searchData.length) {
     returnChatData = (
       <div className={classes.ChatsContainer}>could not find any data</div>
@@ -189,10 +279,6 @@ const MyChats = () => {
     );
   }
 
-  const onSearchChangeHandler = (e) => {
-    setSearchVal(e.target.value);
-  };
-
   const onMenuClicked = (eventKey, e) => {
     if (e.target.innerHTML === "New Group") {
       setIsCreatingGroup(true);
@@ -208,6 +294,17 @@ const MyChats = () => {
   const onNotificationClick = (item) => {
     onChatLaunch(item.chat);
     dispatch(actions.removeNotification(item));
+  };
+
+  const onSearchFocus = () => {
+    console.log("onsearch focus");
+    setIsSearchResultShow(true);
+  };
+
+  const onSearchBlur = () => {
+    console.log("onsearch blue");
+    // setIsSearchResultShow(false);
+    // setSearchVal("");
   };
 
   return (
@@ -296,10 +393,12 @@ const MyChats = () => {
               placeholder="Search or start a new chat"
               value={searchVal}
               onChange={(e) => onSearchChangeHandler(e)}
+              onFocus={onSearchFocus}
+              onBlur={onSearchBlur}
             ></Form.Control>
-            <Button variant="outline-secondary" onClick={onSearchHandler}>
+            {/* <Button variant="outline-secondary" onClick={onSearchHandler}>
               <AiOutlineSearch color="grey" size={20} />
-            </Button>
+            </Button> */}
             <Button variant="outline-secondary" onClick={onClearHandler}>
               <MdClear color="grey" size={20} />
             </Button>
@@ -319,8 +418,11 @@ const MyChats = () => {
         <button onClick={onClearHandler}>clear</button>
       </div> */}
         <div className={classes.scrollableChats}>
-          {isSearchResultShow && (
+          {isSearchResultShow && searchVal && (
             <div className={classes.searchHeader}> Search Results</div>
+          )}
+          {isSearchResultShow && !searchVal && (
+            <div className={classes.searchHeader}> Recent Searches</div>
           )}
           {returnChatData}
         </div>
