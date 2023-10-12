@@ -17,7 +17,7 @@ import {
 import Cookies from "js-cookie";
 import { ErrorBoundary } from "react-error-boundary";
 
-const ENDPOINT = "http://localhost:5000"; // "https://talk-a-tive.herokuapp.com"; -> After deployment
+const ENDPOINT = "https://chatapp2-0-qyx5.onrender.com";
 var socket, selectedChatCompare;
 
 const ChatWindow = ({ fullwidth }) => {
@@ -26,7 +26,7 @@ const ChatWindow = ({ fullwidth }) => {
   const _id = JSON.parse(Cookies.get("userInfo"))?._id;
   // const token = useSelector((state) => state.token);
   const token = JSON.parse(Cookies.get("userInfo"))?.token;
-  const ENDPOINT = "http://localhost:5000";
+  // const ENDPOINT = "http://localhost:5000";
   const [showGroupInfoModal, setShowGroupInfoModal] = useState(false);
   const [typedMessage, setTypedMessage] = useState("");
   const [messageLoading, setMessageLoading] = useState(false);
