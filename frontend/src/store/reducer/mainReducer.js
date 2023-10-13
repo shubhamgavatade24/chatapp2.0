@@ -31,10 +31,17 @@ const mainReducer = (state = initialState, action) => {
         ...initialState,
       };
     case actionTypes.SET_MYCHATS:
-      return {
-        ...state,
-        myChats: [...action.payload, ...state.myChats],
-      };
+      if (action.shallReplaceMyChats) {
+        return {
+          ...state,
+          myChats: [...action.payload],
+        };
+      } else {
+        return {
+          ...state,
+          myChats: [...action.payload, ...state.myChats],
+        };
+      }
     case actionTypes.EDIT_SINGLE_MYCHAT:
       const updatedArray = state.myChats.map((item) => {
         if (item._id === action.updatedItemId) {

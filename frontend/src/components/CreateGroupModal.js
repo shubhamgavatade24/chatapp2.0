@@ -92,7 +92,7 @@ const CreateGroupModal = ({
       // setMychats((state) => {
       //   return [data, ...state];
       // });
-      dispatch(actions.addChatsToMyChats([data]));
+      dispatch(actions.addChatsToMyChats([data], false));
       setGroupName("");
       setUserSearch("");
       setSearchList([]);

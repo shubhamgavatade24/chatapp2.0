@@ -20,10 +20,11 @@ export const logOutUser = () => {
   };
 };
 
-export const addChatsToMyChats = (dataArray) => {
+export const addChatsToMyChats = (dataArray, shallReplaceMyChats) => {
   return {
     type: actionTypes.SET_MYCHATS,
     payload: dataArray,
+    shallReplaceMyChats: shallReplaceMyChats,
   };
 };
 

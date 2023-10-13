@@ -94,7 +94,7 @@ const MyChats = ({ fullwidth }) => {
 
       const { data } = await axios.get("/api/chats", config);
 
-      dispatch(actions.addChatsToMyChats(data));
+      dispatch(actions.addChatsToMyChats(data, true));
       setSearchLoading(false);
     } catch (e) {
       console.log(e);
@@ -220,7 +220,7 @@ const MyChats = ({ fullwidth }) => {
         manageRecentSearches(item);
         let isChatPresent = myChats.find((item) => item._id === data._id);
         if (!isChatPresent) {
-          dispatch(actions.addChatsToMyChats([data]));
+          dispatch(actions.addChatsToMyChats([data], false));
         }
       } catch (e) {
         console.log(e);
@@ -230,53 +230,55 @@ const MyChats = ({ fullwidth }) => {
     }
   };
 
-  var returnChatData;
-  if (searchLoading) {
-    returnChatData = (
-      <div className={classes.ChatsContainer}>
-        <Spinner animation="border" variant="light" />
-      </div>
-    );
-  } else if (isSearchResultShow && !searchVal) {
-    const recentData = JSON.parse(window.localStorage.getItem("recent" + _id));
-    if (recentData.length) {
-      returnChatData = (
+  const getReturnChatData = () => {
+    // var returnChatData;
+    if (searchLoading) {
+      return (
+        <div className={classes.ChatsContainer}>
+          <Spinner animation="border" variant="light" />
+        </div>
+      );
+    } else if (isSearchResultShow && !searchVal) {
+      const recentData = JSON.parse(
+        window.localStorage.getItem("recent" + _id)
+      );
+      if (recentData.length) {
+        return (
+          <ChatData
+            dataGetter={dataForwarder}
+            isSearchResultShow={isSearchResultShow}
+            chatLauncher={onChatLaunch}
+          />
+        );
+      } else {
+        return <div className={classes.ChatsContainer}>No recent Searches</div>;
+      }
+    } else if (isSearchResultShow && !searchData.length) {
+      return (
+        <div className={classes.ChatsContainer}>could not find any data</div>
+      );
+    } else if (isSearchResultShow && searchData.length) {
+      return (
         <ChatData
           dataGetter={dataForwarder}
           isSearchResultShow={isSearchResultShow}
           chatLauncher={onChatLaunch}
         />
       );
-    } else {
-      returnChatData = (
-        <div className={classes.ChatsContainer}>No recent Searches</div>
+    } else if (!isSearchResultShow && !myChats.length) {
+      return (
+        <div className={classes.ChatsContainer}>could not find any chats</div>
+      );
+    } else if (!isSearchResultShow && myChats.length) {
+      return (
+        <ChatData
+          dataGetter={dataForwarder}
+          isSearchResultShow={isSearchResultShow}
+          chatLauncher={onChatLaunch}
+        />
       );
     }
-  } else if (isSearchResultShow && !searchData.length) {
-    returnChatData = (
-      <div className={classes.ChatsContainer}>could not find any data</div>
-    );
-  } else if (isSearchResultShow && searchData.length) {
-    returnChatData = (
-      <ChatData
-        dataGetter={dataForwarder}
-        isSearchResultShow={isSearchResultShow}
-        chatLauncher={onChatLaunch}
-      />
-    );
-  } else if (!isSearchResultShow && !myChats.length) {
-    returnChatData = (
-      <div className={classes.ChatsContainer}>could not find any chats</div>
-    );
-  } else if (!isSearchResultShow && myChats.length) {
-    returnChatData = (
-      <ChatData
-        dataGetter={dataForwarder}
-        isSearchResultShow={isSearchResultShow}
-        chatLauncher={onChatLaunch}
-      />
-    );
-  }
+  };
 
   const onMenuClicked = (eventKey, e) => {
     if (e.target.innerHTML === "New Group") {
@@ -423,7 +425,7 @@ const MyChats = ({ fullwidth }) => {
           {isSearchResultShow && !searchVal && (
             <div className={classes.searchHeader}> Recent Searches</div>
           )}
-          {returnChatData}
+          {getReturnChatData()}
         </div>
         <CreateGroupModal
           isCreatingGroup={isCreatingGroup}

@@ -58,6 +58,9 @@ const Signup = () => {
       console.log(data);
       dispatch(mainActions.loginUser(data));
       Cookies.set("userInfo", JSON.stringify(data), { expires: 1 });
+      if (!window.localStorage.getItem("recent" + data._id)) {
+        window.localStorage.setItem("recent" + data._id, JSON.stringify([]));
+      }
       navigate("/chats");
     } catch {
       errorShow(true);
