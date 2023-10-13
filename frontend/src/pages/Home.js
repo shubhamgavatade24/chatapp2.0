@@ -6,6 +6,7 @@ import Signup from "../components/Signup";
 const Home = () => {
   return (
     <div className={classes.container}>
+      <h1 className={classes.appTitle}>ChatEZ</h1>
       <Tabs defaultActiveKey="Login" id="Home-page" className="mb-3" fill>
         <Tab eventKey="Login" title="Login">
           <Login />

@@ -14,17 +14,6 @@ const Chats = () => {
     width: "100%",
   };
 
-  function windowSizeChangeHandler() {
-    setWidth(window.innerWidth);
-    console.log(width);
-  }
-  useEffect(() => {
-    window.addEventListener("resize", windowSizeChangeHandler);
-    return () => {
-      window.removeEventListener("resize", windowSizeChangeHandler);
-    };
-  }, []);
-
   return (
     <ErrorBoundary fallback={<p>⚠️Something went wrong</p>}>
       <div className={classes.backround}>
