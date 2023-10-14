@@ -22,7 +22,9 @@ const ChatFrame = ({ groupName, miscData, onClick, deleteEnable, groupId }) => {
       <AiOutlineDelete color="lightgrey" size={20} />
     )
   ) : (
-    <div className={classes.miscData}>{miscData}</div>
+    <div className={classes.miscData}>
+      {miscData.length > 12 ? miscData.substr(0, 15) + "..." : miscData}
+    </div>
   );
 
   return (

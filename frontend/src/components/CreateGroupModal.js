@@ -151,7 +151,7 @@ const CreateGroupModal = ({
                 <SearchFrame
                   key={item._id}
                   groupName={item.name}
-                  miscData="15nov"
+                  miscData={item.email}
                   onClick={() => {
                     addUserToList(item);
                   }}

@@ -13,6 +13,8 @@ const ScrollableChat = ({ messages }) => {
       marginLeft: item.sender._id === _id ? "auto" : "5px",
       borderRadius:
         item.sender._id === _id ? "10px 0px 10px 10px" : "0px 10px 10px 10px",
+      backgroundColor:
+        item.sender._id === _id ? "rgb(1, 92, 75)" : "rgb(34, 44, 51)",
     };
   };
 

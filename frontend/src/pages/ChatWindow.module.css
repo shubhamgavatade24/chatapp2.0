@@ -38,12 +38,13 @@
   /* display: flex;
   flex: 1; */
   height: 84%;
+  padding-right: 5px;
 }
 
 .footerInput {
   background-color: rgb(32, 44, 51);
   border-radius: 5px;
-  margin: 0 0 0 5px;
+  margin: 0 5px 0 5px;
   height: 6%;
 }
 
