@@ -1,0 +1,33 @@
+version: "2"
+services: 
+  chat-app-backend:
+    image: 
+    container_name: chat-app-backend
+    restart: on-failure
+    ports:
+      - "6001:80"
+  
+  chat-app-frontend:
+    image:
+    container_name: chat-app-frontend
+    restart: on-failure
+    ports: 
+      - "6002:80"
+
+  chat-app-gateway:
+    image: nginx:stable
+    container-name: chat-app-gateway
+    restart: always
+    volumes: 
+      # - "./config/nginx-gateway/mime.types:/etc/nginx/mime.types"
+      - "./config/nginx-gateway/conf.d:etc/nginx/conf.d"
+      - "./config/nginx-gateway/sites-enabled:/etc/nginx/sites-enabled"
+      # - "./config/nginx-gateway/error-pages:/etc/nginx/error-pages"
+      - "./config/nginx-gateway/nginx.conf:/etc/nginx/nginx.conf"
+    ports:
+      - "80:80"
+
+networks:
+  default:
+    name: chat-app
+    external: true
